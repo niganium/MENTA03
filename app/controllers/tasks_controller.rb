@@ -1,12 +1,13 @@
 class TasksController < ApplicationController
   def index
     if params[:is_finished] == "working"
-      @tasks = Task.where(is_finished: "作業中")
+      session[:is_finished] = "working"
     elsif params[:is_finished] == "finished"
-      @tasks = Task.where(is_finished: "完了")
+      session[:is_finished] = "finished"
     else
-      @tasks = Task.all
+      session[:is_finished] = "all"
     end
+    task_where
     @task = Task.new
     @sub_id = 0
   end
@@ -14,25 +15,35 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.save
-    @tasks = Task.all
+    task_where
     @sub_id = 0
   end
 
   def update
     task = Task.find(params[:id])
     task.update(task_params)
-    @tasks = Task.all
+    task_where
     @sub_id = 0
   end
 
   def destroy
     task = Task.find(params[:id])
     task.destroy
-    @tasks = Task.all
+    task_where
     @sub_id = 0
   end
 
   private
+  def task_where
+    if session[:is_finished] == "working"
+      @tasks = Task.where(is_finished: "working")
+    elsif session[:is_finished] == "finished"
+      @tasks = Task.where(is_finished: "finished")
+    else
+      @tasks = Task.all
+    end
+  end
+
   def task_params
     params.require(:task).permit(:content, :is_finished)
   end

@@ -1,8 +1,8 @@
 $("#tasksArea").html("<%= j(render 'tasks/task', { tasks: @tasks }) %>")
 $(".radio_button").prop('checked', false);
-<% if params[:is_finished] == "作業中" %>
+<% if params[:is_finished] == "working" %>
   $("#working").prop('checked', true);
-<% elsif params[:is_finished] == "完了" %>
+<% elsif params[:is_finished] == "finished" %>
   $("#finished").prop('checked', true);
 <% else %>
   $("#all").prop('checked', true);

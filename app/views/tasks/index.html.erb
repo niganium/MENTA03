@@ -2,10 +2,10 @@
 <%= link_to tasks_path, remote: :true do %>
   <label class="radio_button"><input type="radio" name="taksStatus" id="all" checked class="radio_button">すべて</label>
 <% end %>
-<%= link_to tasks_path(is_finished: "作業中"), remote: :true do %>
+<%= link_to tasks_path(is_finished: "working"), remote: :true do %>
   <label class="radio_button"><input type="radio" name="taksStatus" id="working" class="radio_button">作業中</label> 
 <% end %>
-<%= link_to tasks_path(is_finished: "完了"), remote: :true do %>
+<%= link_to tasks_path(is_finished: "finished"), remote: :true do %>
   <label class="radio_button"><input type="radio" name="taksStatus" id="finished" class="radio_button">完了</label>
 <% end %>
 
