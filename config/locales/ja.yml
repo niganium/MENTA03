@@ -1,0 +1,6 @@
+ja:
+  enums:
+    task:
+      is_finished:
+        working: "作業中"
+        finished: "完了"

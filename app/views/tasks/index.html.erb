@@ -1,0 +1,31 @@
+<h1>ToDoリスト</h1>
+<%= link_to tasks_path, remote: :true do %>
+  <label class="radio_button"><input type="radio" name="taksStatus" id="all" checked class="radio_button">すべて</label>
+<% end %>
+<%= link_to tasks_path(is_finished: "作業中"), remote: :true do %>
+  <label class="radio_button"><input type="radio" name="taksStatus" id="working" class="radio_button">作業中</label> 
+<% end %>
+<%= link_to tasks_path(is_finished: "完了"), remote: :true do %>
+  <label class="radio_button"><input type="radio" name="taksStatus" id="finished" class="radio_button">完了</label>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>コメント</th>
+      <th>状態</th>
+    </tr>
+  </thead>
+  <tbody id="tasksArea">
+    <%= render "task", tasks: @tasks %>
+  </tbody>
+</table>
+
+<h2>新規タスクの追加</h2>
+  <%= form_with(model: @task) do |f| %>
+    <%= f.label :content do %>
+      <%= f.text_field :content, id: "taskField", required: :required %>
+    <% end %>
+    <%= f.submit "追加"%>
+  <% end %>

@@ -1,0 +1,17 @@
+<% tasks.each do |task| %>
+  <tr class="todo_<% task.id %>">
+    <td><%= @sub_id %></td>
+    <td><%= task.content %></td>
+    <td class="td_task_status">
+      <% if task.is_finished == "working" %>
+        <%= button_to "作業中", task_path(task), method: :put, remote: :true, params: { task: {is_finished: "finished"} } %>
+      <% else %>
+        <%= button_to "完了", task_path(task), method: :put, remote: :true, params: { task: {is_finished: "working"} } %>
+      <% end %>
+      <%= link_to task_path(task), method: :delete, remote: :true do %>
+        <input type="submit" value="削除">
+      <% end %>
+    </td>
+  </tr>
+  <% @sub_id += 1 %>
+<% end %>
